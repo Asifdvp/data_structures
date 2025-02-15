@@ -84,10 +84,8 @@ class Array {
       start < 0 ? Math.max(arr.length + start, 0) : Math.min(start, arr.length);
     let endIndex =
       end < 0 ? Math.max(arr.length + end, 0) : Math.min(end, arr.length);
-    for (let i = 0; i < this.data.length; i++) {
-      if (startIndex <= i && endIndex > i) {
-        newArr.push(this.data[i]);
-      }
+    for (let i = startIndex; i < endIndex; i++) {
+      newArr.push(this.data[i]);
     }
     return newArr;
   }
