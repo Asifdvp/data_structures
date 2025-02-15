@@ -34,7 +34,7 @@ class Array {
     }
     this.data[0] = value;
   }
-  //map
+  //Map
   map(func) {
     let newArrayy = [];
     for (let i = 0; i < this.data.length; i++) {
@@ -52,7 +52,7 @@ class Array {
     }
     return newArray;
   }
-
+  //Reduce
   reduce(func, initialValue) {
     let startIndex = 0;
     let totalValue;
@@ -74,21 +74,73 @@ class Array {
     }
     return totalValue;
   }
+  //Slice
+  slice(start = 0, end = this.data.length) {
+    let newArr = [];
+    let startIndex = start;
+    let endIndex = end;
+    //Start if
+    let arr = this.data;
+    if (!arr.length) return [];
+
+    if (startIndex < 0) {
+      if (-arr.length < startIndex) {
+        startIndex = arr.length + startIndex;
+      } else {
+        startIndex = 0;
+      }
+    }
+    if (endIndex < 0) {
+      if (-arr.length < endIndex) {
+        endIndex = arr.length + endIndex;
+      } else {
+        endIndex = arr.length;
+      }
+    }
+    for (let i = 0; i < this.data.length; i++) {
+      if (startIndex <= i && endIndex > i) {
+        newArr.push(this.data[i]);
+      }
+    }
+    return newArr;
+  }
+
   //Reduce
 
   //•	push(), pop(), shift(), unshift(), map(), filter(), reduce(), slice(), splice(), sort().
 }
 
-const arr = new Array();
-arr.push(1);
-arr.push(2);
-arr.push(3);
+const animals = new Array();
+animals.push("ant");
+animals.push("bison");
+animals.push("camel");
+animals.push("duck");
+animals.push("elephant");
 // arr.shift();
 // arr.pop();
 // arr.unshift(4);
 
 // let newArrasy = arr.map((item, index) => item + index);
 // let filterArray = arr.filter((item, index) => item > 2);
-let reduceArr = arr.reduce((acc, item) => (acc += item));
-console.log(arr);
-console.log(reduceArr);
+// let reduceArr = arr.reduce((acc, item) => (acc += item));
+// console.log(reduceArr);
+
+// console.log(animals[-1])
+
+console.log(animals.slice(null,null));
+// Expected output: Array ["camel", "duck", "elephant"]
+
+console.log(animals.slice(2, 4));
+// Expected output: Array ["camel", "duck"]
+
+console.log(animals.slice(1, 5));
+// Expected output: Array ["bison", "camel", "duck", "elephant"]
+
+console.log(animals.slice(-2));
+// Expected output: Array ["duck", "elephant"]
+
+console.log(animals.slice(0, -4));
+// Expected output: Array ["camel", "duck"]
+
+console.log(animals.slice());
+// Expected output: Array ["ant", "bison", "camel", "duck", "elephant"]
