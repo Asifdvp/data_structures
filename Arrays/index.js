@@ -77,26 +77,13 @@ class Array {
   //Slice
   slice(start = 0, end = this.data.length) {
     let newArr = [];
-    let startIndex = start;
-    let endIndex = end;
-    //Start if
     let arr = this.data;
     if (!arr.length) return [];
 
-    if (startIndex < 0) {
-      if (-arr.length < startIndex) {
-        startIndex = arr.length + startIndex;
-      } else {
-        startIndex = 0;
-      }
-    }
-    if (endIndex < 0) {
-      if (-arr.length < endIndex) {
-        endIndex = arr.length + endIndex;
-      } else {
-        endIndex = arr.length;
-      }
-    }
+    let startIndex =
+      start < 0 ? Math.max(arr.length + start, 0) : Math.min(start, arr.length);
+    let endIndex =
+      end < 0 ? Math.max(arr.length + end, 0) : Math.min(end, arr.length);
     for (let i = 0; i < this.data.length; i++) {
       if (startIndex <= i && endIndex > i) {
         newArr.push(this.data[i]);
@@ -127,7 +114,7 @@ animals.push("elephant");
 
 // console.log(animals[-1])
 
-console.log(animals.slice(null,null));
+console.log(animals.slice(null, null));
 // Expected output: Array ["camel", "duck", "elephant"]
 
 console.log(animals.slice(2, 4));
