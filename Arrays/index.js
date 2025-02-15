@@ -53,6 +53,27 @@ class Array {
     return newArray;
   }
 
+  reduce(func, initialValue) {
+    let startIndex = 0;
+    let totalValue;
+
+    if (initialValue != undefined) {
+      totalValue = initialValue;
+    } else {
+      if (this.data.length === 0) {
+        throw new TypeError(
+          "TypeError: Reduce of empty array with no initial value"
+        );
+      }
+      totalValue = this.data[0];
+      startIndex = 1;
+    }
+
+    for (let i = startIndex; i < this.data.length; i++) {
+      totalValue = func(totalValue, this.data[i]);
+    }
+    return totalValue;
+  }
   //Reduce
 
   //•	push(), pop(), shift(), unshift(), map(), filter(), reduce(), slice(), splice(), sort().
@@ -64,9 +85,10 @@ arr.push(2);
 arr.push(3);
 // arr.shift();
 // arr.pop();
-arr.unshift(4);
+// arr.unshift(4);
 
 // let newArrasy = arr.map((item, index) => item + index);
 // let filterArray = arr.filter((item, index) => item > 2);
+let reduceArr = arr.reduce((acc, item) => (acc += item));
 console.log(arr);
-console.log(filterArray);
+console.log(reduceArr);
