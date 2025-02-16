@@ -90,9 +90,41 @@ class Array {
     return newArr;
   }
 
-  //Reduce
+  //Splice
 
-  //•	push(), pop(), shift(), unshift(), map(), filter(), reduce(), slice(), splice(), sort().
+  splice(start = 0, deleteCount = 0, ...items) {
+    const arr = this.data;
+    let startIndex =
+      start < 0 ? Math.max(arr.length + start, 0) : Math.min(arr.length, start);
+    let deleteItems = arr.slice(startIndex, startIndex + deleteCount);
+
+    this.data = [
+      ...arr.slice(0, startIndex),
+      ...items,
+      ...arr.slice(startIndex + deleteCount),
+    ];
+    console.log(deleteItems);
+    return deleteItems;
+  }
+
+  reverse1() {
+    let arr = [...this.data];
+    for (let i = 0; i < this.data.length; i++) {
+      this.data[i] = arr[arr.length - 1 - i];
+    }
+  }
+  reverse() {
+    let left = 0;
+    let right = this.data.length - 1;
+    while (left < right) {
+      let temp = this.data[left];
+      this.data[left] = this.data[right];
+      this.data[right] = temp
+      left++;
+      right--;
+    }
+  }
+  //•	splice(), sort().
 }
 
 const animals = new Array();
@@ -101,31 +133,9 @@ animals.push("bison");
 animals.push("camel");
 animals.push("duck");
 animals.push("elephant");
-// arr.shift();
-// arr.pop();
-// arr.unshift(4);
 
-// let newArrasy = arr.map((item, index) => item + index);
-// let filterArray = arr.filter((item, index) => item > 2);
-// let reduceArr = arr.reduce((acc, item) => (acc += item));
-// console.log(reduceArr);
-
-// console.log(animals[-1])
-
-console.log(animals.slice(null, null));
-// Expected output: Array ["camel", "duck", "elephant"]
-
-console.log(animals.slice(2, 4));
-// Expected output: Array ["camel", "duck"]
-
-console.log(animals.slice(1, 5));
-// Expected output: Array ["bison", "camel", "duck", "elephant"]
-
-console.log(animals.slice(-2));
-// Expected output: Array ["duck", "elephant"]
-
-console.log(animals.slice(0, -4));
-// Expected output: Array ["camel", "duck"]
-
-console.log(animals.slice());
-// Expected output: Array ["ant", "bison", "camel", "duck", "elephant"]
+// console.log(animals.splice(0));
+// console.log(animals.splice(0, 2, "salam", "dtes"));
+console.log(animals);
+animals.reverse();
+console.log(animals);
