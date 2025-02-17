@@ -103,7 +103,6 @@ class Array {
       ...items,
       ...arr.slice(startIndex + deleteCount),
     ];
-    console.log(deleteItems);
     return deleteItems;
   }
 
@@ -119,23 +118,58 @@ class Array {
     while (left < right) {
       let temp = this.data[left];
       this.data[left] = this.data[right];
-      this.data[right] = temp
+      this.data[right] = temp;
       left++;
       right--;
     }
   }
+
+  bubbleSort() {
+    let n = this.data.length;
+    let arr = this.data;
+    for (let i = 0; i < n - 1; i++) {
+      for (let j = 0; j < n - i - 1; j++) {
+        if (this.data[j] > this.data[j + 1]) {
+          // let temp = arr[j];
+          // arr[j] = arr[j + 1];
+          // arr[j + 1] = temp;
+          [arr[j], arr[j + 1]] = [arr[j + 1], arr[j]];
+        }
+      }
+    }
+    return arr;
+  }
+
+  bubbleSortRecursive(n = this.data.length) {
+    let arr = this.data;
+
+    if (n == 1) return arr;
+    let swapped = false;
+    for (let i = 0; i < n - 1; i++) {
+      if (arr[i] > arr[i + 1]) {
+        [arr[i], arr[i + 1]] = [arr[i + 1], arr[i]];
+        swapped = true;
+      }
+    }
+    if (!swapped) {
+      console.log("onsuzfa siralnib");
+      return arr;
+    }
+    return this.bubbleSortRecursive(n - 1);
+  }
+
   //•	splice(), sort().
 }
 
 const animals = new Array();
-animals.push("ant");
-animals.push("bison");
-animals.push("camel");
-animals.push("duck");
-animals.push("elephant");
+animals.push(5);
+animals.push(3);
+animals.push(2);
+animals.push(1);
+animals.push(4);
 
 // console.log(animals.splice(0));
 // console.log(animals.splice(0, 2, "salam", "dtes"));
 console.log(animals);
-animals.reverse();
-console.log(animals);
+console.log(animals.bubbleSortRecursive());
+console.log(animals.bubbleSortRecursive());
